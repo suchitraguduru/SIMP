@@ -1,8 +1,8 @@
 
 <?php
     session_start();
-    setcookie('UNAME',$row['user'],60);
-    unset($_SESSION['UNAME']);
+    setcookie('CUSER',$cuser,60);
+    unset($_SESSION['CUSER']);
     header('location:login.php');
     die();
 

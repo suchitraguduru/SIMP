@@ -1,19 +1,19 @@
 <?php
-include 'config.php';
-if(isset($_SESSION['UNAME']) || isset($_COOKIE['UNAME'])){
+include 'api/db.php';
+if(isset($_SESSION['CUSER']) || isset($_COOKIE['CUSER'])){
   header('location:dashboard.php');
   die();
 }
 if(isset($_POST['sub'])){
-  $user=$_POST['user'];
-  $pass=$_POST['pass'];
-  $query="SELECT * FROM userinfo where user='$user' and pass='$pass'";
-  $res=mysqli_query($conn,$query);
+  $cuser=$_POST['user'];
+  $cpass=$_POST['pass'];
+  $query="SELECT * FROM companies where username='$cuser' and password='$cpass'";
+  $res=mysqli_query($con,$query);
   if(mysqli_num_rows($res)>0){
     $row=mysqli_fetch_assoc($res);
     //echo "welcome".$data['user'];
-    $_SESSION['UNAME']=$row['user'];
-    setcookie('UNAME',$row['user'],time()+60*60*24);
+    $_SESSION['CUSER']=$row['name'];
+    setcookie('CUSER',$row['name'],time()+60*60*24);
     header('location:dashboard.php');
     die();
 
@@ -71,7 +71,7 @@ if(isset($_POST['sub'])){
   </style>
   <body>
     <div class="logbox">
-      <h2>student Login</h2>
+      <h2>companies  Login</h2>
       <form class=""  method="POST">
           <div class="inputs">
 
